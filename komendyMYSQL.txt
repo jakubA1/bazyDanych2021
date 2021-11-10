@@ -1,0 +1,43 @@
+CREATE TABLE postac(id_postaci INT  AUTO_INCREMENT PRIMARY KEY, nazwa VARCHAR(40), rodzaj ENUM('wiking','ptak','kobieta'), data_ur DATE, wiek INT UNSIGNED);
+
+INSERT INTO postac VALUES(1,'Bjorn','wiking','1070-10-07','40')
+INSERT INTO postac VALUES('2','Drozd','ptak','1060-08-05','10');
+INSERT INTO postac VALUES('3','Tesciowa','kobieta','1899-11-07','80')
+
+UPDATE postac SET wiek=88 WHERE nazwa='Tesciowa';
+
+CREATE TABLE walizka(id_walizki INT PRIMARY KEY AUTO_INCREMENT, pojemnosc INT UNSIGNED, kolor ENUM('rozowy','czerwony','teczowy','zolty'),id_wlasciciela INT, FOREIGN KEY(id_wlasciciela) REFERENCES postac(id_postaci) ON DELETE CASC
+ADE);
+
+ALTER TABLE walizka MODIFY kolor ENUM('rozowy','czerwony','teczowy','zolty') DEFAULT 'rozowy';
+INSERT INTO walizka(pojemnosc, id_wlasciciela) VALUES(15,1),(30,3);
+
+CREATE TABLE izba(adres_budynku VARCHAR(100), nazwa_izby VARCHAR(100), metraz INT UNSIGNED, wlasciciel INT, FOREIGN KEY(wlasciciel) REFERENCES postac(id_postaci) ON DELETE SET NULL, PRIMARY KEY(adres_budynku, nazwa_izby));
+
+ ALTER TABLE izba ADD COLUMN kolor_izby VARCHAR(100) DEFAULT 'czarny' AFTER metraz;
+
+INSERT INTO izba(adres_budynku, nazwa_izby, metraz, wlasciciel) VALUES('Lidzbark19', 'spizarnia','20','1');
+
+CREATE TABLE przetwory( id_przetworu INT AUTO_INCREMENT PRIMARY KEY, rok_produkcji
+INT(4) DEFAULT 1654, id_wykonawcy INT, FOREIGN KEY (id_wykonawcy) REFERENCES postac(id_postaci), zawartosc VARCHAR(100), dodatek VARCHAR(100) DEFAULT 'papryczka chilli', id_konsumenta INT, FOREIGN KEY (id_konsumenta) REFERENCES postac(id_postaci));
+
+INSERT INTO przetwory(zawartosc) VALUES ('bigos');
+
+
+
+INSERT INTO postac(nazwa,rodzaj) VALUES ('wiking1','wiking');
+INSERT INTO postac(nazwa,rodzaj) VALUES ('wiking2','wiking');
+INSERT INTO postac(nazwa,rodzaj) VALUES ('wiking3','wiking');
+INSERT INTO postac(nazwa,rodzaj) VALUES ('wiking4','wiking');
+INSERT INTO postac(nazwa,rodzaj) VALUES ('wiking5','wiking');
+
+
+CREATE TABLE statek(nazwa_statku VARCHAR(100) PRIMARY KEY,rodzaj_statku ENUM('duzy','sredni','maly'), data_wodowania DATE, max_ladownosc FLOAT);
+
+INSERT INTO statek(nazwa_statku,rodzaj_statku,data_wodowania,max_ladownosc) VALUES
+('statek1','duzy','12.11.1400',100);
+
+ALTER TABLE postac ADD COLUMN funkcja VARCHAR(100);
+
+UPDATE postac SET funkcja = 'kapitan' WHERE nazwa = 'Bjorn';
+

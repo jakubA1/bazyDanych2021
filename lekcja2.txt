@@ -1,0 +1,45 @@
+Zad.1,a
+DELETE FROM postac WHERE nazwa='wiking2';
+DELETE FROM postac WHERE nazwa='wiking4';
+
+Zad.1,b
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE przetwory drop DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory drop DROP FOREIGN KEY przetwory_ibfk_2;
+ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_1;
+ALTER TABLE postac DROP PRIMARY KEY;
+
+Zad.2,a
+ALTER TABLE postac ADD COLUMN pesel INT VARCHAR(11);
+UPDATE postac set pesel='11111111111' WHERE nazwa='Bjorn';
+UPDATE postac set pesel='22222222222' WHERE
+nazwa='Drozd';
+UPDATE postac set pesel='33333333333' WHERE nazwa='Tesciowa';
+UPDATE postac set pesel='44444444444' WHERE nazwa='wiking1';
+UPDATE postac set pesel='55555555555' WHERE nazwa='wiking3';
+UPDATE postac set pesel='66666666666' WHERE nazwa='wiking5';
+ALTER TABLE postac ADD CONSTRAINT PK_postac PRIMARY KEY (pesel);
+
+Zad.2,b
+ALTER TABLE postac MODIFY COLUMN rodzaj ENUM('wiking','ptak','kobieta','syrena');
+
+Zad.2,c
+INSERT INTO postac(id_postaci,nazwa,rodzaj,data_ur,wiek,pesel) VALUES (9,'Gertruda Nieszczera','syrena','1001-01-01',90,77777777777);
+
+
+Zad.3,a
+UPDATE postac set nazwa_statku='statek1' WHERE nazwa LIKE '%a%';
+
+
+Zad.3,b
+UPDATE statek SET max_ladownosc=max_ladownosc*0.7 WHERE data_wodowania LIKE '19%';
+
+Zad.3,c
+ALTER TABLE postac ADD CONSTRAINT wiek_chk_1 CHECK (wiek<1000);
+
+Zad.4,a
+INSERT INTO postac(id_postaci,nazwa,data_ur,wiek,pesel) VALUES (5,'Loko','1100-10-27',19,55555555555);
+
+Zad.4,b
+CREATE TABLE marynarz AS SELECT * FROM postac;
+

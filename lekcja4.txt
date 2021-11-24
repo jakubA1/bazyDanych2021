@@ -1,0 +1,15 @@
+Zad.1,a
+SELECT AVG(waga) FROM kreatura WHERE rodzaj='wiking';
+
+Zad.1,b
+SELECT AVG(waga), COUNT(rodzaj),rodzaj FROM kreatura GROUP BY rodzaj;
+
+Zad.1,c
+SELECT AVG(TIMESTAMPDIFF(YEAR, DataUr, CURDATE())) AS age,rodzaj FROM kreatura GROUP BY rodzaj;
+
+Zad.2,a
+SELECT SUM(waga), rodzaj FROM zasob GROUP BY rodzaj;
+
+Zad.2,b
+SELECT AVG(waga*ilosc),nazwa FROM zasob GROUP BY nazwa HAVING SUM(ilosc)>=4 AND SUM(waga)>10;
+

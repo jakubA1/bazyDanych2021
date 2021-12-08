@@ -23,3 +23,6 @@ Zad.3,b
 SELECT kreatura.nazwa,zasob.nazwa FROM ekwipunek INNER JOIN kreatura ON kreatura.idKreatury=ekwipunek.idKreatury INNER JOIN zasob ON zasob.idzasobu=ekwipunek.idZasobu ORDER BY kreatura.nazwa;
 
 Zad.3,c
+SELECT kreatura.nazwa FROM kreatura LEFT JOIN ekwipunek ON ekwipunek.idKreatury=kreatura.idKreatury WHERE ekwipunek.idKreatury IS NULL;
+
+Zad.4,a

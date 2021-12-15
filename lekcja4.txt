@@ -26,3 +26,16 @@ Zad.3,c
 SELECT kreatura.nazwa FROM kreatura LEFT JOIN ekwipunek ON ekwipunek.idKreatury=kreatura.idKreatury WHERE ekwipunek.idKreatury IS NULL;
 
 Zad.4,a
+SELECT kreatura.nazwa, zasob.nazwa FROM kreatura, zasob, ekwipunek WHERE kreatura.rodzaj = 'wiking' AND YEAR(kreatura.dataUr) BETWEEN 1670 AND 1679 AND kreatura.idKreatury = ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu;
+
+Zad.4,b
+SELECT k.nazwa FROM kreatura k INNER JOIN ekwipunek e ON k.idKreatury=e.idKreatury INNER JOIN zasob z ON e.idZasobu=z.idZasobu WHERE z.rodzaj='jedzenie' ORDER BY k.dataUr DESC limit 5;
+
+Zad.4,c
+SELECT t1.idKreatury, t1.nazwa, t2.idKreatury, t2.nazwa FROM kreatura t1 INNER JOIN kreatura t2 ON t1.idKreatury+5=t2.idKreatury;
+
+Zad.5,a
+SELECT ROUND(SUM(zasob.ilosc*zasob.waga)/COUNT(1), 2) AS srednia, kreatura.rodzaj FROM zasob, kreatura, ekwipunek WHERE kreatura.rodzaj != 'malpa' AND kreatura.rodzaj != 'waz' AND kreatura.idKreatury = ekwipunek.idKreatury AND zasob.idZasobu!=ekwipunek.idZasobu GROUP BY kreatura.rodzaj;
+
+Zad.5,b
+SELECT k.nazwa, k.rodzaj, k.dataUr FROM kreatura k, (SELECT rodzaj, MIN(dataUr) AS MIN, MAX(dataUr) AS MAX FROM kreatura GROUP BY rodzaj) AS pod WHERE k.dataUr=pod.min OR k.dataUr=pod.max AND k.rodzaj=pod.rodzaj;
